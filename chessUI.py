@@ -5,37 +5,42 @@ from tkinter import PhotoImage
 from RealtimeSTT import AudioToTextRecorder
 class ChessUI:
     def __init__(self,root):
+        # Initialize the UI
         root.title("Blind Chess");
         root.geometry("600x800");
+        # Mainframe of UI
         body = tk.Frame(root);
         body.grid(column=0, row=0, sticky=(N,S,E,W));
 
         # Chess Board Portion of the screen.
         self.chess_board = tk.Frame(body, relief="sunken");
         self.chess_board.grid(column=0,columnspan=2, row=0, sticky=(N,S,E,W));
+        # Create the labels across the chess board
         for row in range(8):
             for col in range(8):
                 space = tk.Label(self.chess_board, wraplength=40, height=5, width=6, text="", borderwidth=1, relief="solid");
                 space.grid(column=col, row=row, sticky=(N,S,E,W));
         self.screen = tk.Label(self.chess_board, relief="solid",background="black");
 
+
         # Console Frame Portion of the screen.
         console_frame = tk.Frame(body,width=400, height=200, relief="solid");
         console_frame.grid(column=0, row=1, sticky=(N,S,E,W));
-
+        # Console Label Creation
         console_label = tk.Label(console_frame, text= "Console")
         console_label.grid(column=0, row=0,sticky=(N,W));
-
+        # Console Creation
         self.console = scrolledtext.ScrolledText(console_frame, height=10, width=45,state=DISABLED);
         self.console.grid(column=0, row=1, sticky=(N,S,E,W));
+
 
         # Button Portion of the screen
         button_panel = tk.Frame(body, width=200, height=200, relief="solid");
         button_panel.grid(column=1, row=1, sticky=(N,S,E,W));
-
+        # Button Label Creation
         button_panel_label = tk.Label(button_panel, text= "Say 'start game' after pushing button to begin.")
         button_panel_label.grid(column=0, row=0, sticky=(N,E,W));
-
+        # Button Creation
         self.button = tk.Button(button_panel, width=6,height=4,text="START",overrelief="raised",bg="red",fg="white",font=("Arial", 12, "bold"))
         self.button.place(anchor='center', relx=.5, rely=.5);
         # Bind the button events
