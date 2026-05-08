@@ -46,7 +46,7 @@ class ChessUI:
     def update_console(self,user_input,game_response):
         self.console.config(state=NORMAL);
         self.console.insert(END, f">: {user_input}\n"); # Plug in here.
-        self.console.insert(END, f"$: {game_response}\n"); #And here.
+        self.console.insert(END, f"$: {game_response}. Speak Now.\n"); #And here.
         self.console.config(state=DISABLED);
         self.console.see(END); # Keep last line visible
 
