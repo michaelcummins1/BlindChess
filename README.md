@@ -1,6 +1,6 @@
 Describe what you did, how you did it, what challenges you encountered, and how you solved them.
 
-We have developed an application that allows one to play chess (optionally) blind. The entire game works through voice commands. We used python and various modules, such as tkinter, threading, and dataclasses. There is a UI component where the player can observe the game. 
+We have developed an application that allows one to play chess (optionally) blind. The entire game works through voice commands. We used python and various modules, such as RealtimeSTT, tkinter, threading, and dataclasses. There is a UI component where the player can observe the game. 
 
 Challenges:
 D: I was learning Tkinter from scratch, so there was a lot of time spent looking at guides and screwing around until it worked well enough. I thought the scroll bar would have been difficult, but it turns out the Push and Hold Button bested me.
