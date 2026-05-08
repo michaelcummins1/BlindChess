@@ -645,12 +645,22 @@ class ChessGame:
 
     def _attempt_castle(self, castle_type: str) -> CommandResult:
         base_row = 7 if self.turn == WHITE else 0
-        to_col = 6 if castle_type == "castle_kingside" else 2
+        pseudo = get_pseudo_legal_moves(self.board, base_row, 4,
+                                        self.en_passant_target, self.castling_rights)
+        matched = next((m for m in pseudo if m["special"] == castle_type), None)
+ 
+        if not matched:
+            return self._result(False, "error",
+                                f"Invalid move — castling is not available. "
+                                f"Please indicate {self.turn}'s move again.")
+ 
+        to_col = matched["col"]
         if not is_legal_move(self.board, base_row, 4, base_row, to_col,
                               castle_type, self.castling_rights, self.en_passant_target):
             return self._result(False, "error",
                                 f"Invalid move — castling is not available. "
                                 f"Please indicate {self.turn}'s move again.")
+ 
         return self._execute_move(base_row, 4, base_row, to_col, castle_type, "king")
 
     def _attempt_move(self, from_sq: str, to_sq: str) -> CommandResult:
