@@ -21,7 +21,7 @@ game.py, chessUI.py are entirely Devin's work.
 
 Approximately how many hours it took you to finish this assignment (I will not judge you for this at all...I am simply using it to gauge if the assignments are too easy or hard)?
 
-D: My portions took at least 8-10 hours total. I was learning tkinter from scratch (It should show in the product) and had a difficult time wrapping my head around how UI development works. I get the boxes-within-boxes approach, but I can't say I like how tkinter sizes things (based on content). I thought it a good challenge nonetheless.
+D: My portions took at least 8-12 hours total. I was learning tkinter from scratch (It should show in the product) and had a difficult time wrapping my head around how UI development works. I get the boxes-within-boxes approach, but I can't say I like how tkinter sizes things (based on content). I thought it a good challenge nonetheless.
 
 M: 
 
@@ -33,12 +33,12 @@ M:
 
 Using the grading specifications on this page, discuss briefly the grade you would give yourself and why. Discuss each item in the grading specification.
 
-D: For me, I think a B. I  managed to make a product that does almost exactly what we had set out to do. While the embellishments are missing, such cosmetic features would be no challenge to implement in future. My biggest grievance is the button. I'm not entirely sure how to make that work, though it does something useful for the app., so I cannot complain too much. Some feedback, such as changing the display names for pieces, was incorporated. In the future, those could be swapped out for pictures.
+D: For me, I think an A. I  managed to make a product that does almost exactly what we had set out to do. While the embellishments are missing, such cosmetic features would be no challenge to implement in future. My biggest grievance is the button. That took the longest to get working, which I did not expect. Some feedback, such as changing the display names for pieces, was incorporated. In the future, those could be swapped out for pictures.
 
 M:
 
 Any other concerns that you have. For instance, if you have a bug that you were unable to solve but you made progress, write that here. The more you articulate the problem the more partial credit you will receive (it is fine to leave this blank).
 
-D: While my button works, it is not a push to talk (hold it down, machine listens, release, process speech) button. It instead starts the program and STT thread, which is a fine use, but not exactly what I had hoped to do.
+D: While my button works, it is not a push to talk (hold it down, machine listens, release, process speech) button. It instead starts the program and STT thread, which is a fine use, but not exactly what I had hoped to do. -- Edit: I managed to get the button working as intended.
 
 M:

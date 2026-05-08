@@ -38,10 +38,10 @@ class ChessUI:
         button_panel = tk.Frame(body, width=200, height=200, relief="solid");
         button_panel.grid(column=1, row=1, sticky=(N,S,E,W));
         # Button Label Creation
-        button_panel_label = tk.Label(button_panel, text= "Say 'start game' after pushing button to begin.")
+        button_panel_label = tk.Label(button_panel, text= "Push down button and say 'start game' to begin")
         button_panel_label.grid(column=0, row=0, sticky=(N,E,W));
         # Button Creation
-        self.button = tk.Button(button_panel, width=6,height=4,text="START",overrelief="raised",bg="red",fg="white",font=("Arial", 12, "bold"))
+        self.button = tk.Button(button_panel, width=6,height=4,text="PTT",overrelief="raised",bg="red",fg="white",font=("Arial", 14, "bold"))
         self.button.place(anchor='center', relx=.5, rely=.5);
         # Bind the button events
         self.held = False;

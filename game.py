@@ -4,16 +4,20 @@ from chessUI import ChessUI
 import tkinter
 import queue
 import threading
+import pyttsx3
 # Function to thread STT component
 def listen(recorder, q):
-    while True:
         try:
             game_command = recorder.text()
             # Enqueue the command
             q.put(("command", game_command))
         except Exception as e:
             print(f"Error in listen thread: {e}")
-            break
+
+def button_release(recorder,q):
+    recorder.stop()
+    threading.Thread(target=listen, args=(recorder, command_q), daemon=True).start()
+
 # Game logic
 def game_loop(root, ui, game, q):
     try:
@@ -32,10 +36,15 @@ def game_loop(root, ui, game, q):
             ui.update_console(game_command, result_msg)
             # update the chessboard ui
             ui.update_chessboard(result.state.board)
+            # Speak the user input and result
+            pyttsx3.speak(game_command)
+            pyttsx3.speak(result_msg)
             if game.winner is None:
                 # Schedule next queue check
                 root.after(100, game_loop, root, ui, game, q)
             else:
+                # Declare Winner
+                pyttsx3.speak(f"Game over! Winner: {game.winner}")
                 print("Game over! Winner: ", game.winner)
                 root.quit()
     except queue.Empty:
@@ -51,13 +60,13 @@ if __name__ == '__main__':
     root = tkinter.Tk()
     ui = ChessUI(root)
     command_q = queue.Queue()
+    transcription = ""
     # Setting up default state of board.
     ui.update_chessboard(game.board)
     ui.hide_board()
-    # Init thread as variable
-    thread = threading.Thread(target=listen, args=(recorder, command_q), daemon=True)
     # Bind thread to button
-    ui.button.bind("<Button-1>", lambda e: thread.start())
+    ui.button.bind("<ButtonPress-1>", lambda e: recorder.start())
+    ui.button.bind("<ButtonRelease-1>", lambda e: button_release(recorder, command_q))
     # update UI
     root.after(100, game_loop, root, ui, game, command_q)
     # main loop
