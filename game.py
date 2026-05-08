@@ -41,7 +41,6 @@ def game_loop(root, ui, game, q):
             root.after(100, game_loop, root, ui, game, q)
 
 if __name__ == '__main__':
-    print("Wait until it says 'speak now'")
     recorder = AudioToTextRecorder()
     game = ChessGame()
     root = tkinter.Tk()

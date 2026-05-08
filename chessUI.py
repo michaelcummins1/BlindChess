@@ -7,8 +7,6 @@ class ChessUI:
     def __init__(self,root):
         root.title("Blind Chess");
         root.geometry("600x800");
-        # chess_board.set("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-        # Not sure how to map the chess pieces yet.
         body = tk.Frame(root);
         body.grid(column=0, row=0, sticky=(N,S,E,W));
 
@@ -22,23 +20,23 @@ class ChessUI:
         self.screen = tk.Label(self.chess_board, relief="solid",background="black");
 
         # Console Frame Portion of the screen.
-        console_frame = tk.Frame(body, relief="solid");
+        console_frame = tk.Frame(body,width=400, height=200, relief="solid");
         console_frame.grid(column=0, row=1, sticky=(N,S,E,W));
 
         console_label = tk.Label(console_frame, text= "Console")
         console_label.grid(column=0, row=0,sticky=(N,W));
 
-        self.console = scrolledtext.ScrolledText(console_frame, height=10, width=40);
+        self.console = scrolledtext.ScrolledText(console_frame, height=10, width=45,state=DISABLED);
         self.console.grid(column=0, row=1, sticky=(N,S,E,W));
 
         # Button Portion of the screen
-        button_panel = tk.Frame(body, relief="solid");
+        button_panel = tk.Frame(body, width=200, height=200, relief="solid");
         button_panel.grid(column=1, row=1, sticky=(N,S,E,W));
 
-        button_panel_label = tk.Label(button_panel, text= "Push Button to Start Audio Listening")
-        button_panel_label.grid(column=0, row=0, sticky=(N,W));
+        button_panel_label = tk.Label(button_panel, text= "Say 'start game' after pushing button to begin.")
+        button_panel_label.grid(column=0, row=0, sticky=(N,E,W));
 
-        self.button = tk.Button(button_panel,width=4,height=4,text="PRESS")
+        self.button = tk.Button(button_panel, width=6,height=4,text="START",overrelief="raised",bg="red",fg="white",font=("Arial", 12, "bold"))
         self.button.place(anchor='center', relx=.5, rely=.5);
         # Bind the button events
         self.held = False;
@@ -46,7 +44,7 @@ class ChessUI:
     def update_console(self,user_input,game_response):
         self.console.config(state=NORMAL);
         self.console.insert(END, f">: {user_input}\n"); # Plug in here.
-        self.console.insert(END, f"$: {game_response}. Speak Now.\n"); #And here.
+        self.console.insert(END, f"$: {game_response} Speak Now.\n"); #And here.
         self.console.config(state=DISABLED);
         self.console.see(END); # Keep last line visible
 
