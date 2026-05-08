@@ -1,3 +1,4 @@
+# Imports
 from RealtimeSTT import AudioToTextRecorder
 from chesslogic import ChessGame
 from chessUI import ChessUI
@@ -5,9 +6,12 @@ import tkinter
 import queue
 import threading
 import pyttsx3
+
+
 # Function to thread STT component
 def listen(recorder, q):
         try:
+            # Process the recorded audio
             game_command = recorder.text()
             # Enqueue the command
             q.put(("command", game_command))
@@ -15,7 +19,9 @@ def listen(recorder, q):
             print(f"Error in listen thread: {e}")
 
 def button_release(recorder,q):
+    #Stop recording
     recorder.stop()
+    # Create thread to process speech, update UI.
     threading.Thread(target=listen, args=(recorder, command_q), daemon=True).start()
 
 # Game logic
@@ -61,10 +67,12 @@ if __name__ == '__main__':
     ui = ChessUI(root)
     command_q = queue.Queue()
     transcription = ""
-    # Setting up default state of board.
+    # Setting up default state of board
     ui.update_chessboard(game.board)
     ui.hide_board()
-    # Bind thread to button
+
+    # Bind Functions to buttons, pressing starts the recording process
+    # A release function stops recording and creates a thread to process the audio and update the UI.
     ui.button.bind("<ButtonPress-1>", lambda e: recorder.start())
     ui.button.bind("<ButtonRelease-1>", lambda e: button_release(recorder, command_q))
     # update UI
