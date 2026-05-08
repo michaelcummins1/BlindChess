@@ -2,9 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import scrolledtext
 from tkinter import PhotoImage
-
-from matplotlib.pyplot import pie
-from sympy import false
+from RealtimeSTT import AudioToTextRecorder
 class ChessUI:
     def __init__(self,root):
         root.title("Blind Chess");
@@ -37,13 +35,13 @@ class ChessUI:
         button_panel = tk.Frame(body, relief="solid");
         button_panel.grid(column=1, row=1, sticky=(N,S,E,W));
 
-        button_panel_label = tk.Label(button_panel, text= "Push To Talk")
+        button_panel_label = tk.Label(button_panel, text= "Push Button to Start Audio Listening")
         button_panel_label.grid(column=0, row=0, sticky=(N,W));
 
-        button = tk.Button(button_panel,width=4,height=4,command=lambda: self.update_console("User", "PC"))
-        button.place(anchor='center', relx=.5, rely=.5);
-
-
+        self.button = tk.Button(button_panel,width=4,height=4,text="PRESS")
+        self.button.place(anchor='center', relx=.5, rely=.5);
+        # Bind the button events
+        self.held = False;
     # Method to update Console.
     def update_console(self,user_input,game_response):
         self.console.config(state=NORMAL);
@@ -57,13 +55,21 @@ class ChessUI:
         for row in range(8):
             for col in range(8):
                 place = self.chess_board.grid_slaves(column=col, row=row)
-                place[0].config(text=arg[row][col]);
+                cell = arg[row][col]
+                if cell is None:
+                    text = ""
+                else:
+                    piece = cell["piece"]
+                    color = cell["color"]
+                    text = (color, piece)
+                place[0].config(text=text)
     # Methods to hide and reveal the chess board.
     def hide_board(self):
         self.screen.grid(rowspan=8,columnspan=8, row=0,column=0, sticky=(N,S,E,W));
+    
     def reveal_board(self):
         self.screen.grid_remove();
- 
-#root=tk.Tk()
-#app = ChessUI(root)
-#root.mainloop()
+
+# root=tk.Tk()
+# app = ChessUI(root)
+# root.mainloop()
