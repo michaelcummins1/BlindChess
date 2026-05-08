@@ -749,7 +749,7 @@ class ChessGame:
 
 
 # ---------------------------------------------------------------------------
-# Quick smoke test (run: python chesslogic.py)
+# Quick test (run: python chesslogic.py)
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
